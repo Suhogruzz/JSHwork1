@@ -1,6 +1,4 @@
 function GuessANumber() {
-    var n = Math.floor(Math.random() * 1000);
-    console.log(n);
     var attempts = 3
     while (attempts > 0) {
         let guess = prompt('Угадай число от 0 до 999', 0)
@@ -10,24 +8,29 @@ function GuessANumber() {
                 break;
             case guess == n:
                 if(confirm('Вы угадали! Закрыть страницу?')) {
-                    window.close();
-                }
-                GuessANumber();
+                    return window.close();
+                } else {
+                    return document.location.reload();
+                };
             case guess < n:
                 attempts -= 1;
-                alert(`Ваше число меньше загадонного. Осталось попыток: ${attempts}`);
+                alert(`Ваше число меньше загаданного. Осталось попыток: ${attempts}`);
                 break;
             case guess > n:
                 attempts -= 1;
-                alert(`Ваше число больше загадонного Осталось попыток: ${attempts}`);
+                alert(`Ваше число больше загаданного Осталось попыток: ${attempts}`);
                 break;
         };
     };
-    if(confirm('Попытки кончились! Закрыть страницу?')) {
-        window.close();
+    if(confirm(`Попытки кончились! Загаданное число: ${n}  Закрыть страницу?`)) {
+       return window.close();
     } else {
-        GuessANumber();
+       return document.location.reload();
     };
 };
 
-GuessANumber();
+var n = Math.floor(Math.random() * 1000);
+console.log(n);
+
+var start = document.querySelector('.start_button');
+start.addEventListener('click', GuessANumber)
